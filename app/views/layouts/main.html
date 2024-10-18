@@ -5,10 +5,35 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 {% block header %}
-  {{ govukHeader({
-    homepageUrl: "/",
-    serviceName: serviceName,
-    serviceUrl: "/",
-    containerClasses: "govuk-width-container"
-  }) }}
+ {% from "internal-service-header/macro.njk" import dwpHeader %}
+
+{{
+    dwpHeader({
+        serviceName: serviceName,
+        serviceHref: '/',
+        container: true
+    })
+}}
 {% endblock %}
+
+{% block footer %}
+{% from "internal-service-footer/macro.njk" import dwpFooter %}
+
+{{
+    dwpFooter({
+        meta: {
+            visuallyHiddenTitle: "About this website",
+            items: [
+            {
+                href: "",
+                text: "Accessibility statement"
+            },
+            {
+                href: "",
+                text: "Privacy"
+            }
+            ]
+        }
+        
+    }) 
+}}{% endblock %}

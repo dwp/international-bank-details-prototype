@@ -2,6 +2,8 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "timeline/macro.njk" import dwpTimeline %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
 
 {% block pageTitle %}
   {{ serviceName }} – international account details
@@ -12,12 +14,31 @@
   text: "Back",
   href: "javascript:window.history.back()"
 }) }}
+{{
+  dwpQuickReference({
+      ariaLabel: "Case information",
+      classes: "dwp-quick-reference--alternative",
+      primaryReference: {
+          text: 'Name:',
+          value: 'Jane Doe'
+      },
+      secondaryReference: {
+          text: 'Benefit:',
+          value: 'Maternity allowance'
+      }
+  })
+}}
 {% endblock %}
 
 {% block content %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+     
+      
+
+      
 
       {% if isChange %}
       <form class="form" action="/bank-details-change" method="post">
