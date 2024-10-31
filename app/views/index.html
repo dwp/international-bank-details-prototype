@@ -10,16 +10,23 @@
 
 
     <h1 class="govuk-heading-xl">
-      {{ serviceName }}
+      Prototype selection
     </h1>
 
+    <p>1. Simple flow without selection of scenarios</p>
+    {{ govukButton({
+      text: "Start",
+      href: "/flow1/location-alt1"
+    }) }}
 
-      {{ govukButton({
-          text: "Continue",
-          href: "location-alt1"
-        }) }}
-    
-  </div>
+    <p>2. Selection of scenarios using NINO search</p>
+
+    {{ govukButton({
+      text: "Start",
+      href: "/flow2/search"
+    }) }}
+
+</div>
 </div>
 
 {% endblock %}

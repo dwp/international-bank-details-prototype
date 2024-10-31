@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  {{ serviceName }} – location
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+      ariaLabel: "Case information",
+      classes: "dwp-quick-reference--alternative",
+      primaryReference: {
+          text: 'Name:',
+          value: 'Jane Doe'
+      },
+      secondaryReference: {
+          text: 'Benefit:',
+          value: 'Maternity allowance'
+      }
+  })
+}}
+{% endblock %}
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="/flow1/location" method="post">
+  
+        {{ govukRadios({
+          name: "location",
+          value: data['location'],
+          fieldset: {
+            legend: {
+              text: "Where is the account based?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "uk",
+              text: "UK bank or building society account"
+            },
+            {
+              value: "international",
+              text: "International account"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

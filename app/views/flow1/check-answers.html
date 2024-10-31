@@ -1,0 +1,197 @@
+{% extends "layouts/main.html" %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  Check your answers – {{ serviceName }}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+      ariaLabel: "Case information",
+      classes: "dwp-quick-reference--alternative",
+      primaryReference: {
+          text: 'Name:',
+          value: 'Jane Doe'
+      },
+      secondaryReference: {
+          text: 'Benefit:',
+          value: 'Maternity allowance'
+      }
+  })
+}}
+{% endblock %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers
+      </h1>
+
+      {{ govukSummaryList({
+        rows: [
+        {
+          key: {
+            text: "Account based in the UK"
+          },
+          value: {
+            text: data['location']
+          },
+          actions: {
+            items: [
+              {
+                href: "/flow1/location-alt1",
+                text: "Change",
+                visuallyHiddenText: "Account location"
+              }
+            ]
+          }
+        }
+        ,
+        {
+          key: {
+            text: "Account type"
+          },
+          value: {
+            text: accountDisplayText
+          },
+          actions: {
+            items: [
+              {
+                href: "/flow1/account-type-alt1",
+                text: "Change",
+                visuallyHiddenText: "Account type"
+              }
+            ]
+          }
+        }
+        ,
+      {
+            key: {
+              text: "Name on the account"
+            },
+            value: {
+              text: data['accountHolderName']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow1/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "Name on the account"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Country code"
+            },
+            value: {
+              text: data['countryCode']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow1/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "Country code"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Bank name"
+            },
+            value: {
+              text: data['bankName']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow1/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "Bank name"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Bank address"
+            },
+            value: {
+              text: data['bankAddress']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow1/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "Bank address"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "BIC or SWIFT code"
+            },
+            value: {
+              text: data['bicSwift']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow1/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "BIC or SWIFT code"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "IBAN"
+            },
+            value: {
+              text: data['ibanNumber']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow1/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "IBAN"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+      
+      
+
+      <form action="/flow1/check-answers" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Submit"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

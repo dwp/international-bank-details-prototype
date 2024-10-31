@@ -3,7 +3,7 @@
 {% from "quick-reference/macro.njk" import dwpQuickReference %}
 
 {% block pageTitle %}
-  {{ serviceName }} – do you know the account type
+  {{ serviceName }} – location
 {% endblock %}
 
 
@@ -14,17 +14,17 @@
 }) }}
 {{
   dwpQuickReference({
-      ariaLabel: "Case information",
-      classes: "dwp-quick-reference--alternative",
-      primaryReference: {
-          text: 'Name:',
-          value: 'Jane Doe'
-      },
-      secondaryReference: {
-          text: 'Benefit:',
-          value: 'Maternity allowance'
-      }
-  })
+    ariaLabel: "Case information",
+    classes: "dwp-quick-reference--alternative",
+    primaryReference: {
+        text: 'Name:',
+        value: data['scenarioData']['name']
+    },
+    secondaryReference: {
+        text: 'Benefit:',
+        value: data['chosenCard']['benefit']
+    }
+})
 }}
 {% endblock %}
 {% block content %}
@@ -32,28 +32,26 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/account-type-known" method="post">
+      <form class="form" action="/flow2/location" method="post">
   
         {{ govukRadios({
-          name: "account-type",
+          name: "location",
+          value: data['location'],
           fieldset: {
             legend: {
-              text: "Do you know the account type?",
+              text: "Where is the account based?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
           },
-          hint: {
-            text: "For example, a checking account"
-          },
           items: [
             {
-              value: "account-known",
-              text: "Yes"
+              value: "uk",
+              text: "UK bank or building society account"
             },
             {
-              value: "account-unknown",
-              text: "No"
+              value: "international",
+              text: "International account"
             }
           ]
         }) }}

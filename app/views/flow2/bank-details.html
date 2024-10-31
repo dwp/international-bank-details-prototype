@@ -16,17 +16,17 @@
 }) }}
 {{
   dwpQuickReference({
-      ariaLabel: "Case information",
-      classes: "dwp-quick-reference--alternative",
-      primaryReference: {
-          text: 'Name:',
-          value: 'Jane Doe'
-      },
-      secondaryReference: {
-          text: 'Benefit:',
-          value: 'Maternity allowance'
-      }
-  })
+    ariaLabel: "Case information",
+    classes: "dwp-quick-reference--alternative",
+    primaryReference: {
+        text: 'Name:',
+        value: data['scenarioData']['name']
+    },
+    secondaryReference: {
+        text: 'Benefit:',
+        value: data['chosenCard']['benefit']
+    }
+})
 }}
 {% endblock %}
 
@@ -41,22 +41,25 @@
       
 
       {% if isChange %}
-      <form class="form" action="/bank-details-change" method="post">
+      <form class="form" action="/flow2/bank-details-change" method="post">
         {% else %}
-      <form class="form" action="/bank-details" method="post">
+      <form class="form" action="/flow2/bank-details" method="post">
         {% endif %}
   
         <h1 class="govuk-heading-l">
           Enter international account details
         </h1>
   
+       
+      
         {{ govukInput({
           label: { 
             text: "Name on the account"
           },
           id: "account-holder-name",
           name: "accountHolderName",
-          value: data['accountHolderName']
+          value: data['accountHolderName'],
+          spellcheck: false
         }) }}
         
         {{ govukInput({
@@ -65,7 +68,8 @@
           },
           id: "bank-name",
           name: "bankName",
-          value: data['bankName']
+          value: data['bankName'],
+          spellcheck: false
         }) }}
         
 
@@ -75,21 +79,10 @@
           value: data['bankAddress'],
           label: {
             text: "Bank address"
-          }
+          },
+          spellcheck: false
         }) }}
           
-        {{ govukInput({
-          label: {
-            text: "Country code"
-          },
-          id: "country-code",
-          classes: "govuk-input--width-3",
-          name: "countryCode",
-          value: data['countryCode'],
-          hint: {
-            text: "Must be a valid ISO 3166-1 alpha-3 country code"
-          }
-        }) }}
         {{ govukInput({
           label: {
             text: "BIC or SWIFT code"
@@ -100,7 +93,8 @@
           classes: "govuk-input--width-20",
           hint: {
             text: "Must be between 8 and 11 characters long"
-          }
+          },
+          spellcheck: false
         }) }}
 
         {{ govukInput({
@@ -112,7 +106,8 @@
           value: data['ibanNumber'],
           hint: {
             text: "Must be between 15 & 34 alphanumeric characters"
-          }
+          },
+          spellcheck: false
         }) }}
 
         {{ govukButton({

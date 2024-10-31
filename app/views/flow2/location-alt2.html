@@ -3,7 +3,7 @@
 {% from "quick-reference/macro.njk" import dwpQuickReference %}
 
 {% block pageTitle %}
-  {{ serviceName }} –  account type
+  {{ serviceName }} – location
 {% endblock %}
 
 
@@ -18,49 +18,47 @@
       classes: "dwp-quick-reference--alternative",
       primaryReference: {
           text: 'Name:',
-          value: 'Jane Doe'
+          value: data['scenarioData']['name']
       },
       secondaryReference: {
           text: 'Benefit:',
-          value: 'Maternity allowance'
+          value: data['chosenCard']['benefit']
       }
   })
 }}
-{% endblock %}{% block content %}
+{% endblock %}
+{% block content %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/account-type-change" method="post">
+      {% if isChange %}
+      <form class="form" action="/flow2/location-change" method="post">
+        {% else %}
+        <form class="form" action="/flow2/location" method="post">
+          {% endif %}
   
         {{ govukRadios({
-          name: "account-type",
-          fieldset: {
+          name: "location",
+          value: data['location'],
+          hint: {
+            text: "This could be a bank, building society or credit union account."
+          },
+                  fieldset: {
             legend: {
-              text: "What is the account type?",
+              text: "Is the account based in the UK?", 
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
           },
           items: [
             {
-              value: "checking-current",
-              text: "Checking or current account"
+              value: "Yes",
+              text: "Yes"
             },
             {
-              value: "savings",
-              text: "Savings account"
-            },
-            {
-              value: "other",
-              text: "Other"
-            },
-            {
-              divider: "or"
-            },
-            {
-              value: "dont-know",
-              text: "I don't know"
+              value: "No",
+              text: "No"
             }
           ]
         }) }}

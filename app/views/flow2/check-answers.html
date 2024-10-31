@@ -1,0 +1,110 @@
+{% extends "layouts/main.html" %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  Check your answers – {{ serviceName }}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+    ariaLabel: "Case information",
+    classes: "dwp-quick-reference--alternative",
+    primaryReference: {
+        text: 'Name:',
+        value: data['scenarioData']['name']
+    },
+    secondaryReference: {
+        text: 'Benefit:',
+        value: data['chosenCard']['benefit']
+    }
+})
+}}
+{% endblock %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers
+      </h1>
+
+      {{ govukSummaryList({
+        rows: [
+        {
+          key: {
+            text: "Account based in the UK"
+          },
+          value: {
+            text: data['location']
+          },
+          actions: {
+            items: [
+              {
+                href: "/flow2/location-alt1",
+                text: "Change",
+                visuallyHiddenText: "Account location"
+              }
+            ]
+          }
+        }
+        
+  
+        ,
+        {
+          key: {
+            text: "Country code"
+          },
+          value: {
+            text: data['countryCode']
+          },
+          actions: {
+            items: [
+              {
+                href: "/flow2/country-code",
+                text: "Change",
+                visuallyHiddenText: "Country code"
+              }
+            ]
+          }
+        }
+              ,
+        
+      {
+            key: {
+              text: "Account details"
+            },
+            value: {
+              html: "<p>" + data['accountHolderName'] + "</p>" + "<p>" + data['bankName'] + "</p>" + "<p>" + data['bankAddress'] + "</p>" + "<p>" + data['bicSwift'] + "</p>" + "<p>" + data['ibanNumber'] + "</p>"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/flow2/bank-details",
+                  text: "Change",
+                  visuallyHiddenText: "Account details"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+      
+      
+
+      <form action="/flow2/check-answers" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Submit"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

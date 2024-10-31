@@ -32,9 +32,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% if isChange %}
-      <form class="form" action="/account-type-change" method="post">
+      <form class="form" action="/flow1/account-type-change" method="post">
       {% else %}
-      <form class="form" action="/account-type" method="post">
+      <form class="form" action="/flow1/account-type" method="post">
       {% endif %}
 
         {{ govukRadios({

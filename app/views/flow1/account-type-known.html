@@ -3,7 +3,7 @@
 {% from "quick-reference/macro.njk" import dwpQuickReference %}
 
 {% block pageTitle %}
-  {{ serviceName }} – location
+  {{ serviceName }} – do you know the account type
 {% endblock %}
 
 
@@ -32,26 +32,28 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/location" method="post">
+      <form class="form" action="/flow1/account-type-known" method="post">
   
         {{ govukRadios({
-          name: "location",
-          value: data['location'],
+          name: "account-type",
           fieldset: {
             legend: {
-              text: "Where is the account based?",
+              text: "Do you know the account type?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
           },
+          hint: {
+            text: "For example, a checking account"
+          },
           items: [
             {
-              value: "uk",
-              text: "UK bank or building society account"
+              value: "account-known",
+              text: "Yes"
             },
             {
-              value: "international",
-              text: "International account"
+              value: "account-unknown",
+              text: "No"
             }
           ]
         }) }}
