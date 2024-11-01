@@ -1,0 +1,86 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  {{ serviceName }} – location
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+      ariaLabel: "Case information",
+      classes: "dwp-quick-reference--alternative",
+      primaryReference: {
+          text: 'Name:',
+          value: data['scenarioData']['name']
+      },
+      secondaryReference: {
+          text: 'Benefit:',
+          value: data['chosenCard']['benefit']
+      }
+  })
+}}
+{% endblock %}
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if isChange %}
+      <form class="form" action="/flow2/location-change" method="post">
+        {% else %}
+        <form class="form" action="/flow2/location" method="post">
+          {% endif %}
+  
+        {{ govukRadios({
+          name: "location",
+          value: data['location'],
+          hint: {
+            html: "<div id='changedName-hint' class='govuk-hint'>This could be a bank, building society or credit union account.</div>
+            <details class='govuk-details'>
+              <summary class='govuk-details__summary'>
+                <span class='govuk-details__summary-text'>
+                  What is a UK based account?
+                </span>
+              </summary>
+              <div class='govuk-details__text'>
+                <p>It will have a valid UK sort code and account number.</p>
+                <p>It can also have an IBAN number which will start with the letters 'GB'.</p>
+              </div>
+            </details>"
+          },
+                  fieldset: {
+            legend: {
+              text: "Is the account based in the UK?", 
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
