@@ -36,7 +36,7 @@ router.use('/', (req, res, next) => {
 // set up the initial data
 router.get('/', function(request, response){
   
-  request.session.data['allData'] = createAllData(request);
+  request.session.data['allData'] = createAllData();
   request.session.save();
   response.render("index.html");
 })
@@ -125,7 +125,11 @@ router.post('/flow1/completed', function(request, response) {
 
 
 // ------------- gets
-
+router.get('/flow2/search', function(request, response){
+  request.session.data['allData'] = createAllData();
+  request.session.data['scenarioData'] = null;
+  response.render("/flow2/search");
+})
 
 
 // detect if we're coming from check answers
@@ -344,14 +348,14 @@ function isAChangeRequest(request) {
   return false;
 }
 
-function createAllData(request) {
+function createAllData() {
 
 return [
   {
     name:"Marjory Pilks",
-  cards:[
+    cards:[
     {
-      benefit: "Maternity allowance",
+      benefit: "State pension",
       location: 'No',
       accountType: "CURRENT",
       accountHolderName: "Marjory Pilks",
@@ -360,129 +364,86 @@ return [
       countryCode: "FRA",
       bicSwift: "BDFEFRPPXXX",
       ibanNumber: "FR1420041010050500013M02606"
-    },
-    {
-      benefit: "Personal independence payment",
-      location: 'Yes',
-      accountHolderName: "Marjory Pilks",
-      bankName: "Lloyds",
-      sortCode: "209778",
-      accountNumber: "70372609",
-      rollOrMembershipNumber: "9123456789"
-    },
-    {
-      benefit: "Carer's allowance",
-      location: 'Yes',
-      accountHolderName: "Priti Mistry",
-      bankName: "Natwest",
-      sortCode: "432718",
-      accountNumber: "87114920",
-      rollOrMembershipNumber: "5746984251"
     }
   ]
 },
 {
-  name:"Brendan Fraser",
-cards:[
+  name:"Thomas Freeman",
+  cards:[
+  
   {
-    benefit: "Maternity allowance",
+    benefit: "Carer's allowance",
     location: 'No',
     accountType: "CURRENT",
-    accountHolderName: "Marjory Pilks",
-    bankName: "BANQUE DE FRANCE",
-    bankAddress: "39 RUE CROIX DES PETITS CHAMPS, PARIS, France",
-    countryCode: "FRA",
-    bicSwift: "BDFEFRPPXXX",
-    ibanNumber: "FR1420041010050500013M02606"
+    accountHolderName: "Thomas Freeman",
+    bankName: "DEUTSCHE BANK AG",
+    bankAddress: "Taunusanlage 12 60325 FRANKFURT AM MAIN, 60262, Germany",
+    countryCode: "DEU",
+    bicSwift: "DEUTDEFFXXX",
+    ibanNumber: "DE89370400440532013000"
   },
   {
-    benefit: "Personal independence payment",
+    benefit: "State pension",
     location: 'Yes',
-    accountHolderName: "Marjory Pilks",
+    accountHolderName: "Thomas Freeman",
     bankName: "Lloyds",
     sortCode: "209778",
     accountNumber: "70372609",
-    rollOrMembershipNumber: "9123456789"
-  },
+    rollOrMembershipNumber: ""
+  }
+]
+},
+
+{
+  name:"Gupta Basu",
+  cards:[
   {
     benefit: "Carer's allowance",
     location: 'Yes',
-    accountHolderName: "Priti Mistry",
-    bankName: "Natwest",
-    sortCode: "432718",
-    accountNumber: "87114920",
+    accountHolderName: "Gupta Basu",
+    bankName: "HSBC",
+    sortCode: "404246",
+    accountNumber: "20433122",
+    rollOrMembershipNumber: ""
+  },
+  {
+    benefit: "State pension",
+    location: 'Yes',
+    accountHolderName: "Gupta Basu",
+    bankName: "Tipton and Coseley building society",
+    sortCode: "202733",
+    accountNumber: "70885096",
     rollOrMembershipNumber: "5746984251"
   }
 ]
 },
 {
-  name:"Antonio Banderas",
-cards:[
-  {
-    benefit: "Maternity allowance",
-    location: 'No',
-    accountType: "CURRENT",
-    accountHolderName: "Marjory Pilks",
-    bankName: "BANQUE DE FRANCE",
-    bankAddress: "39 RUE CROIX DES PETITS CHAMPS, PARIS, France",
-    countryCode: "FRA",
-    bicSwift: "BDFEFRPPXXX",
-    ibanNumber: "FR1420041010050500013M02606"
-  },
-  {
-    benefit: "Personal independence payment",
-    location: 'Yes',
-    accountHolderName: "Marjory Pilks",
-    bankName: "Lloyds",
-    sortCode: "209778",
-    accountNumber: "70372609",
-    rollOrMembershipNumber: "9123456789"
-  },
-  {
-    benefit: "Carer's allowance",
-    location: 'Yes',
-    accountHolderName: "Priti Mistry",
-    bankName: "Natwest",
-    sortCode: "432718",
-    accountNumber: "87114920",
-    rollOrMembershipNumber: "5746984251"
-  }
+  name:"Briony Fitzgerald",
+  cards:[
+    {
+      benefit: "Carer's allowance",
+      location: 'No',
+      accountType: "CURRENT",
+      accountHolderName: "Briony Fitzgerald",
+      bankName: "replace",
+      bankAddress: "replace",
+      countryCode: "ITA",
+      bicSwift: "replace",
+      ibanNumber: "replace"
+    },
+    {
+      benefit: "State pension",
+      location: 'No',
+      accountType: "CURRENT",
+      accountHolderName: "Briony Fitzgerald",
+      bankName: "BANCA NAZIONALE DEL LAVORO S.P.A.",
+      bankAddress: "Viale Altiero, Spinelli, 30 - 00157, Roma",
+      countryCode: "ITA",
+      bicSwift: "BNLIITRRXXX",
+      ibanNumber: "IT620108000000099999999"
+    }
 ]
 },
-{
-  name:"Tom Hanks",
-cards:[
-  {
-    benefit: "Maternity allowance",
-    location: 'No',
-    accountType: "CURRENT",
-    accountHolderName: "Marjory Pilks",
-    bankName: "BANQUE DE FRANCE",
-    bankAddress: "39 RUE CROIX DES PETITS CHAMPS, PARIS, France",
-    countryCode: "FRA",
-    bicSwift: "BDFEFRPPXXX",
-    ibanNumber: "FR1420041010050500013M02606"
-  },
-  {
-    benefit: "Personal independence payment",
-    location: 'Yes',
-    accountHolderName: "Marjory Pilks",
-    bankName: "209778 Short Name",
-    sortCode: "209778",
-    accountNumber: "70372609",
-    rollOrMembershipNumber: "9123456789"
-  },
-  {
-    benefit: "Carer's allowance",
-    location: 'Yes',
-    accountHolderName: "Priti Mistry",
-    bankName: "Natwest",
-    sortCode: "432718",
-    accountNumber: "87114920",
-    rollOrMembershipNumber: "5746984251"
-  }
-]
-}
 
 ]
 }
