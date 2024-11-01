@@ -141,10 +141,10 @@ catch(err) {
   }
 })
 // detect if we're coming from check answers
-router.get('/flow2/location-alt1', function(request, response){
+router.get('/flow2/location-alt5', function(request, response){
   try {
     var isChange = isAChangeRequest(request)
-  response.render("/flow2/location-alt1", {isChange});    
+  response.render("/flow2/location-alt5", {isChange});    
 }
   catch(err) {
     request.session.destroy();
@@ -173,7 +173,7 @@ router.get('/flow2/location', function(request, response){
     
     request.session.data['chosenCard'] = request.session.data['scenarioData']['cards'][option]
     //request.session.data['chosenCard'] = request.session.data['scenarioData']['cards'][];
-    response.redirect("/flow2/location-alt1");
+    response.redirect("/flow2/location-alt5");
     }
   catch(err) {
     request.session.destroy();
