@@ -371,17 +371,7 @@ return [
   name:"Thomas Freeman",
   cards:[
   
-  {
-    benefit: "Carer's allowance",
-    location: 'No',
-    accountType: "CURRENT",
-    accountHolderName: "Thomas Freeman",
-    bankName: "DEUTSCHE BANK AG",
-    bankAddress: "Taunusanlage 12 60325 FRANKFURT AM MAIN, 60262, Germany",
-    countryCode: "DEU",
-    bicSwift: "DEUTDEFFXXX",
-    ibanNumber: "DE89370400440532013000"
-  },
+  
   {
     benefit: "State pension",
     location: 'Yes',
@@ -390,6 +380,17 @@ return [
     sortCode: "209778",
     accountNumber: "70372609",
     rollOrMembershipNumber: ""
+  },
+  {
+    benefit: "Winter fuel",
+    location: 'No',
+    accountType: "CURRENT",
+    accountHolderName: "Thomas Freeman",
+    bankName: "DEUTSCHE BANK AG",
+    bankAddress: "Taunusanlage 12 60325 FRANKFURT AM MAIN, 60262, Germany",
+    countryCode: "DEU",
+    bicSwift: "DEUTDEFFXXX",
+    ibanNumber: "DE89370400440532013000"
   }
 ]
 },
@@ -397,15 +398,7 @@ return [
 {
   name:"Gupta Basu",
   cards:[
-  {
-    benefit: "Carer's allowance",
-    location: 'Yes',
-    accountHolderName: "Gupta Basu",
-    bankName: "HSBC",
-    sortCode: "404246",
-    accountNumber: "20433122",
-    rollOrMembershipNumber: ""
-  },
+  
   {
     benefit: "State pension",
     location: 'Yes',
@@ -414,23 +407,21 @@ return [
     sortCode: "202733",
     accountNumber: "70885096",
     rollOrMembershipNumber: "5746984251"
+  }, 
+  {
+    benefit: "Winter fuel",
+    location: 'Yes',
+    accountHolderName: "Gupta Basu",
+    bankName: "HSBC",
+    sortCode: "404246",
+    accountNumber: "20433122",
+    rollOrMembershipNumber: ""
   }
 ]
 },
 {
   name:"Briony Fitzgerald",
   cards:[
-    {
-      benefit: "Carer's allowance",
-      location: 'No',
-      accountType: "CURRENT",
-      accountHolderName: "Briony Fitzgerald",
-      bankName: "replace",
-      bankAddress: "replace",
-      countryCode: "ITA",
-      bicSwift: "replace",
-      ibanNumber: "replace"
-    },
     {
       benefit: "State pension",
       location: 'No',
@@ -441,7 +432,18 @@ return [
       countryCode: "ITA",
       bicSwift: "BNLIITRRXXX",
       ibanNumber: "IT620108000000099999999"
-    }
+    },
+    {
+      benefit: "Winter fuel",
+      location: 'No',
+      accountType: "CURRENT",
+      accountHolderName: "Briony Fitzgerald",
+      bankName: "replace",
+      bankAddress: "replace",
+      countryCode: "ITA",
+      bicSwift: "replace",
+      ibanNumber: "replace"
+    },
 ]
 },
 

@@ -190,10 +190,12 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
+      <p><a class="govuk-link" href="/flow2/search">Search for a different customer</a></p>
 
       <h1 class="govuk-heading-l">
         Select an account
       </h1>
+
 
       {% for i in data['scenarioData']['cards'] -%}
         {% if i['location'] == 'Yes' %}
