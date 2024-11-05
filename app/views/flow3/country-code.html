@@ -1,0 +1,99 @@
+app/views/flow2/country-code-alt1.html{% extends "layouts/main.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "timeline/macro.njk" import dwpTimeline %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  {{ serviceName }} – international account details
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+    ariaLabel: "Case information",
+    classes: "dwp-quick-reference--alternative",
+    primaryReference: {
+        text: 'Name:',
+        value: data['scenarioData']['name']
+    },
+    secondaryReference: {
+        text: 'Benefit:',
+        value: data['chosenCard']['benefit']
+    }
+})
+}}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+     
+      
+
+      
+
+      {% if isChange %}
+      <form class="form" action="/flow3/country-code-change" method="post">
+        {% else %}
+      <form class="form" action="/flow3/country-code" method="post">
+        {% endif %}
+  
+  
+       
+
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="event-name">
+              What is the country code?
+            </label>
+          </h1>         
+          
+          <details class="govuk-details">
+            <summary class="govuk-details__summary">
+              <span class="govuk-details__summary-text">
+                Valid country codes
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              <ul>
+                <li>AUT (Austria)</li>
+                <li>BEL (Belgium)</li>
+                <li>BGR (Bulgaria)</li>
+                <li>CYP (Cyprus)</li>
+                <li>FIN (Finland)</li>
+                <li>FRA (France)</li>
+                <li>DEU (Germany)</li>
+                <li>GRC (Greece)</li>
+                <li>IRL (Ireland)</li>
+                <li>ITA (Italy)</li>
+                <li>LUX (Luxembourg)</li>
+                <li>MLT (Malta)</li>
+                <li>NLD (Netherlands)</li>
+                <li>PRT (Portugal)</li>
+                <li>ESP (Spain)</li>
+                <li>CHE (Switzerland)</li>
+              </ul>
+            </div>
+          </details>
+          <input value="{{data['countryCode']}}" class="govuk-input govuk-input--width-3" id="country-code" name="countryCode" type="text" aria-describedby="country-code-hint"> 
+        </div>
+        
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

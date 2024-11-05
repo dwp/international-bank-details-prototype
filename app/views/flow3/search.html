@@ -1,0 +1,59 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "timeline/macro.njk" import dwpTimeline %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  {{ serviceName }} – international account details
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+     
+      
+
+      
+
+      <form class="form" action="/flow3/search" method="post">
+     
+  
+        <h1 class="govuk-heading-l">
+          Search for a customer's payment account details
+        </h1>
+  
+        {{ govukInput({
+          label: { 
+            text: "Enter a National Insurance number"
+          },
+          hint: {
+            text: "For example, 'TC738256B'"
+          },
+          id: "nino",
+          name: "nino",
+          classes: "govuk-input--width-20"
+        }) }}
+        
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
