@@ -156,6 +156,7 @@ router.get('/flow3/search', function(request, response){
   
   
       console.log("^^^^^^^^^^^^^^^^^  card = " + JSON.stringify(card, null, 2))
+      // this is also where it could go wrong:
       request.session.data['scenarioData']['cards'][parseInt(request.session.data.option)] = card;
       response.redirect("/flow3/benefit-selection")
       //response.redirect("/")
@@ -168,6 +169,9 @@ router.get('/flow3/search', function(request, response){
     
   
       
+  })
+  router.post('/flow3/error', function(request, response) {
+    response.redirect("/flow3/search")
   })
   
   module.exports = router;
