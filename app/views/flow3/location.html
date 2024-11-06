@@ -22,7 +22,7 @@
       },
       secondaryReference: {
           text: 'Benefit:',
-          value: data['chosenCard']['benefit']
+          value: benefit
       }
   })
 }}
@@ -32,11 +32,8 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% if isChange %}
-      <form class="form" action="/flow3/location-change" method="post">
-        {% else %}
-        <form class="form" action="/flow3/location" method="post">
-          {% endif %}
+      <form class="form" action="/flow3/location?change={{isChange}}" method="post">
+        
   
         {{ govukRadios({
           name: "location",

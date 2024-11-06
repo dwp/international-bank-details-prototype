@@ -34,17 +34,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-     
-      
-
-      
-
-      {% if isChange %}
-      <form class="form" action="/flow3/bank-details-change" method="post">
-        {% else %}
-      <form class="form" action="/flow3/bank-details" method="post">
-        {% endif %}
+      <form class="form" action="/flow3/bank-details?change={{isChange}}" method="post">
   
         <h1 class="govuk-heading-l">
           Enter international account details

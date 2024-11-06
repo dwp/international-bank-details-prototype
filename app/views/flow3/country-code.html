@@ -35,19 +35,7 @@ app/views/flow2/country-code-alt1.html{% extends "layouts/main.html" %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-     
-      
-
-      
-
-      {% if isChange %}
-      <form class="form" action="/flow3/country-code-change" method="post">
-        {% else %}
-      <form class="form" action="/flow3/country-code" method="post">
-        {% endif %}
-  
-  
-       
+      <form class="form" action="/flow3/country-code?change={{isChange}}" method="post">
 
         <div class="govuk-form-group">
           <h1 class="govuk-label-wrapper">
