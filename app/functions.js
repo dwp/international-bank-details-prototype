@@ -113,7 +113,7 @@ function getScenarioData(request) {
     {
       benefit: "Winter fuel",
       location: 'Yes',
-      accountHolderName: "Vikram Basu",
+      accountHolderName: "Gupta Basu",
       bankName: "HSBC",
       sortCode: "404246",
       accountNumber: "20433122",
