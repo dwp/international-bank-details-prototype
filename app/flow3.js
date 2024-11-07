@@ -157,6 +157,7 @@ router.get('/flow3/search', function(request, response){
   
       console.log("^^^^^^^^^^^^^^^^^  card = " + JSON.stringify(card, null, 2))
       // this is also where it could go wrong:
+      
       request.session.data['scenarioData']['cards'][parseInt(request.session.data.option)] = card;
       response.redirect("/flow3/benefit-selection")
       //response.redirect("/")
