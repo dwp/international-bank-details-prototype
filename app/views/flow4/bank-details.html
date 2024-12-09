@@ -1,0 +1,112 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "timeline/macro.njk" import dwpTimeline %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+
+{% block pageTitle %}
+  {{ serviceName }} – international account details
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+    ariaLabel: "Case information",
+    classes: "dwp-quick-reference--alternative",
+    primaryReference: {
+        text: 'Name:',
+        value: data['scenarioData']['name']
+    },
+    secondaryReference: {
+        text: 'Benefit:',
+        value: data['chosenCard']['benefit']
+    }
+})
+}}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" action="/flow4/bank-details?change={{isChange}}" method="post">
+  
+        <h1 class="govuk-heading-l">
+          Enter international account details
+        </h1>
+  
+       
+      
+        {{ govukInput({
+          label: { 
+            text: "Name on the account"
+          },
+          id: "account-holder-name",
+          name: "accountHolderName",
+          value: data['accountHolderName'],
+          spellcheck: false
+        }) }}
+        
+        {{ govukInput({
+          label: {
+            text: "Bank name"
+          },
+          id: "bank-name",
+          name: "bankName",
+          value: data['bankName'],
+          spellcheck: false
+        }) }}
+        
+
+        {{ govukTextarea({
+          name: "bankAddress",
+          id: "bank-address",
+          value: data['bankAddress'],
+          label: {
+            text: "Bank address"
+          },
+          spellcheck: false
+        }) }}
+          
+        {{ govukInput({
+          label: {
+            text: "BIC or SWIFT code"
+          },
+          id: "bic-swift",
+          name: "bicSwift",
+          value: data['bicSwift'],
+          classes: "govuk-input--width-20",
+          hint: {
+            text: "Must be between 8 and 11 characters long"
+          },
+          spellcheck: false
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "IBAN"
+          },
+          id: "iban-number",
+          name: "ibanNumber",
+          value: data['ibanNumber'],
+          hint: {
+            text: "Must be between 15 & 34 alphanumeric characters"
+          },
+          spellcheck: false
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

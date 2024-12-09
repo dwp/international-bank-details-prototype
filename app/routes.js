@@ -14,10 +14,12 @@ const functions = require('./functions.js')
 const flow1 = require('./flow1.js')
 const flow2 = require('./flow2.js')
 const flow3 = require('./flow3.js')
+const flow4 = require('./flow4.js')
 
 router.use(flow1);
 router.use(flow2);
 router.use(flow3);
+router.use(flow4);
 
 // ------------- use
 

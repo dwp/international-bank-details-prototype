@@ -1,0 +1,217 @@
+{% extends "layouts/main.html" %}
+{% from "quick-reference/macro.njk" import dwpQuickReference %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% block pageTitle %}
+  Select an account – {{ serviceName }}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{{
+  dwpQuickReference({
+    ariaLabel: "Case information",
+    classes: "dwp-quick-reference--alternative",
+    primaryReference: {
+        text: 'Name:',
+        value: data['scenarioData']['name']
+    },
+    secondaryReference: {
+        text: 'National insurance number:',
+        value: data['nino']
+    }
+})
+}} 
+{% endblock %}
+
+{% macro international(card, index) %}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: card['benefit']
+    },
+    actions: {
+      items: [
+        {
+          href: "/flow4/select-benefit?option=" + index,
+          text: "Change",
+          visuallyHiddenText: card['benefit']
+        }
+      ]
+    }
+  },
+  rows: [
+  {
+    key: {
+      text: "Account based in the UK"
+    },
+    value: {
+      text: card['location']
+    }
+  }
+  ,
+  {
+    key: {
+      text: "Country code"
+    },
+    value: {
+      text: card['countryCode']
+    }
+  }
+,
+{
+      key: {
+        text: "Name on the account"
+      },
+      value: {
+        text: card['accountHolderName']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "Bank name"
+      },
+      value: {
+        text: card['bankName']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "Bank address"
+      },
+      value: {
+        text: card['bankAddress']
+      }
+    }
+    
+    ,
+      {
+      key: {
+        text: "BIC or SWIFT code"
+      },
+      value: {
+        text: card['bicSwift']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "IBAN"
+      },
+      value: {
+        text: card['ibanNumber']
+      }
+    }
+  ]
+}) }}
+{% endmacro %}
+
+{% macro domestic(card, index) %}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: card['benefit']
+    },
+    actions: {
+      items: [
+        {
+          href: "/flow4/select-benefit?option=" + index,
+          text: "Change",
+          visuallyHiddenText: card['benefit']
+        }
+      ]
+    }
+  },
+  rows: [
+  {
+    key: {
+      text: "Account based in the UK"
+    },
+    value: {
+      text: card['location']
+    }
+  }
+  ,
+{
+      key: {
+        text: "Name on the account"
+      },
+      value: {
+        text: card['accountHolderName']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "Bank name"
+      },
+      value: {
+        text: card['bankName']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "Sort code"
+      },
+      value: {
+        text: card['sortCode']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "Account number"
+      },
+      value: {
+        text: card['accountNumber']
+      }
+    }
+    ,
+    {
+      key: {
+        text: "Roll number or membership number"
+      },
+      value: {
+        text: card['rollOrMembershipNumber']
+      }
+    }
+  ]
+}) }}
+{% endmacro %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <p><a class="govuk-link" href="/flow4/search">Search for a different customer</a></p>
+
+      <h1 class="govuk-heading-l">
+        Select an account
+      </h1>
+
+
+      {% for i in data['scenarioData']['cards'] -%}
+        {% if i['location'] == 'Yes' %}
+          {{ domestic(i, loop.index0) }}
+        {% else %}
+          {{ international(i, loop.index0) }}
+        {% endif %}
+      {%- endfor %}
+
+      
+
+      
+      
+      
+
+
+    </div>
+  </div>
+{% endblock %}

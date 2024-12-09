@@ -19,7 +19,9 @@ function clearAccountData(request) {
     
   }
 function getScenarioData(request) {
-    var nino = request.session.data['nino']
+  try {
+    var nino = request.session.data['nino'].toUpperCase();
+ 
     switch (nino) {
       case 'QQ123456B':
         return request.session.data['allData'][0]
@@ -32,7 +34,10 @@ function getScenarioData(request) {
       default:
         return null;
     }
+  } catch (error) {
+    return null;
   }
+}
   
   function isAChangeRequest(request) {
     if (typeof request.get('Referrer') == 'undefined') return false;
@@ -98,13 +103,13 @@ function getScenarioData(request) {
   },
   
   {
-    name:"Gupta Basu",
+    name:"Yusuf Basu",
     cards:[
     
     {
       benefit: "State pension",
       location: 'Yes',
-      accountHolderName: "Gupta Basu",
+      accountHolderName: "Yusuf Basu",
       bankName: "Tipton and Coseley building society",
       sortCode: "202733",
       accountNumber: "70885096",
@@ -113,7 +118,7 @@ function getScenarioData(request) {
     {
       benefit: "Winter fuel",
       location: 'Yes',
-      accountHolderName: "Gupta Basu",
+      accountHolderName: "Yusuf Basu",
       bankName: "HSBC",
       sortCode: "404246",
       accountNumber: "20433122",
