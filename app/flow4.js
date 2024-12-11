@@ -129,10 +129,14 @@ router.get('/flow4/search', function(request, response){
   router.post('/flow4/country-code', function(request, response) {
     try {
     var code = request.session.data['countryCode'].toUpperCase();
+
     const codes = ["AUT", "BEL", "BGR", "CYP", "FIN", "FRA", "DEU", "GRC", "IRL", "ITA", "LUX", "MLT", "NLD", "PRT", "ESP", "CHE"];
-    if (!codes.includes(code))
+    if (!/^[a-z]+$/i.test(code))
     {
-      response.redirect("/flow4/end-unhappy")
+      response.redirect("/flow4/country-code-error-numeric")
+    } else if (!codes.includes(code))
+    {
+      response.redirect("/flow4/country-code-error-no-match")
     } else {
 
     var isChange = request.query['change'];
